@@ -1,0 +1,83 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+void tablero(int cMatTablero[][4]);
+void igualaMatriz(int matrizA[][4], int matrizB[][4],int tam);
+void display(int matriz[][4], int tam);
+void formaDeGanar( int ganarPartida);
+
+
+int main(){
+    int ganarPartida;
+    int matrizA[4][4];
+    int tam=4;
+    int matrizB[4][4];
+    formaDeGanar(ganarPartida);
+    tablero(matrizA);
+    igualaMatriz(matrizA,matrizB,tam);
+    display(matrizA, tam);
+
+}
+
+
+
+
+//Esta funcion da valores al azar a la matriz
+void tablero(int cMatTablero[][4]) {
+// srand((int)time(0)); se usa para indicar que quieres
+// diferentes números aleatorios cada vez que se corre
+// el programa.
+// Genera aleatoriamente las posiciones para poner las fichas
+// al inicio coloca 1 en todas las casillas
+// posteriormente coloca números aleatorios en las posiciones
+    int iR, iC, iCont;
+
+//inicializa tablero
+    for (iR = 0; iR < 4; iR++)
+        for (iC = 0; iC < 4; iC++)
+            cMatTablero[iR][iC] = 1;
+
+    srand((int) time(0));
+    for (iCont = 1; iCont <= 15;) {
+        iR = rand() % 4; // esto genera un numero aleatorio
+        iC = rand() % 4; // entre 0 y 3 para la posición
+        if (cMatTablero[iR][iC] == 1) {
+            cMatTablero[iR][iC] = rand() % 53 + 1;
+            iCont++;
+        }
+    }
+}
+
+//Esta funcion iguala los valores de la matrizA y la matrizB para poder guardar los valores
+void igualaMatriz(int matrizA[][4], int matrizB[][4],int tam) {
+    for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam; j++) {
+            matrizB[i][j]=matrizA[i][j];
+        }
+    }
+}
+
+//Esta funcion hace un display de la matriz deseada
+void display(int matriz[][4], int tam){
+    for(int i=0; i<tam; i++){
+        for(int j=0; j<tam; j++){
+            cout<< matriz[i][j];
+            if(j<tam-1) {
+                cout << "-";
+            }
+        }
+        cout<<endl;
+    }
+}
+
+//Aqui se introduce la forma en la que se ganara la partida y se asegura que este dato sea valido
+void formaDeGanar( int ganarPartida){
+    cout<< "Ingrese el numero que representa la forma de ganar la partida:"<< endl;
+    cout<< "1.- Vertical"<< endl<< "2.-Horizontal"<<endl<<"3.-Diagonal"<<endl<<"4.-Cuatro esquinas"<<endl<<"5.-Pocito"<<endl<<"6.-Cuadro Exterior"<<endl;
+    do{
+        cin>>ganarPartida;
+    }while(ganarPartida<1 || ganarPartida>6);
+}
