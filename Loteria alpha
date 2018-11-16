@@ -8,7 +8,8 @@ void tablero(int cMatTablero[][4]);
 void igualaMatriz(int matrizA[][4], int matrizB[][4],int tam);
 void display(int matriz[][4], int tam);
 void formaDeGanar( int ganarPartida);
-
+void cambiaNumeroVal(int matrizA[][4], int tam);
+void ganaVertical(int matrizA[][4], int matrizB[][4], int tam);
 
 int main(){
     int ganarPartida;
@@ -19,6 +20,9 @@ int main(){
     tablero(matrizA);
     igualaMatriz(matrizA,matrizB,tam);
     display(matrizA, tam);
+    do{
+        
+    }
 
 }
 
@@ -74,10 +78,65 @@ void display(int matriz[][4], int tam){
 }
 
 //Aqui se introduce la forma en la que se ganara la partida y se asegura que este dato sea valido
-void formaDeGanar( int ganarPartida){
-    cout<< "Ingrese el numero que representa la forma de ganar la partida:"<< endl;
-    cout<< "1.- Vertical"<< endl<< "2.-Horizontal"<<endl<<"3.-Diagonal"<<endl<<"4.-Cuatro esquinas"<<endl<<"5.-Pocito"<<endl<<"6.-Cuadro Exterior"<<endl;
-    do{
-        cin>>ganarPartida;
-    }while(ganarPartida<1 || ganarPartida>6);
+void formaDeGanar( int ganarPartida) {
+    cout << "Ingrese el numero que representa la forma de ganar la partida:" << endl;
+    cout << "1.- Vertical" << endl << "2.-Horizontal" << endl << "3.-Diagonal" << endl << "4.-Cuatro esquinas" << endl
+         << "5.-Pocito" << endl << "6.-Cuadro Exterior" << endl;
+    do {
+        cin >> ganarPartida;
+    } while (ganarPartida < 1 || ganarPartida > 6);
+}
+
+//Con esta funcion, se cambia el valor introducido a 0, si es que este existe en la matriz
+void cambiaNumeroVal(int matrizA[][4], int tam){
+    int numero;
+    cout<<"Ingresa el numero que gritaron"<< endl;
+    cin>>numero;
+    for(int i=0; i<tam; i++){
+        for(int j=0;j<tam; j++){
+            while(matrizA[i][j]==numero){
+                matrizA[i][j]=0;
+            }
+        }
+    }
+}
+
+//En esta funcion se revisan las condiciones para ganar por el metodo vertical
+void ganaVertical(int matrizA[][4], int matrizB[][4], int tam) {
+    if (matrizA[0][0] == 0 && matrizA[1][0] == 0 && matrizA[2][0] == 0 && matrizA[3][0] == 0) {
+        cout << "Ganaste con: " << endl;
+        for (int i = 0; i < tam; i++) {
+            cout << matrizB[i][0] << " ";
+            if (i < tam) {
+                cout << "-";
+            }
+        }
+    }
+    if (matrizA[0][1] == 0 && matrizA[1][1] == 0 && matrizA[2][1] == 0 && matrizA[3][1] == 0) {
+        cout << "Ganaste con: " << endl;
+        for (int i = 0; i < tam; i++) {
+            cout << matrizB[i][1] << " ";
+            if (i < tam) {
+                cout << "-";
+            }
+        }
+    }
+    if (matrizA[0][2] == 0 && matrizA[1][2] == 0 && matrizA[2][2] == 0 && matrizA[3][2] == 0) {
+        cout << "Ganaste con: " << endl;
+        for (int i = 0; i < tam; i++) {
+            cout << matrizB[i][2] << " ";
+            if (i < tam) {
+                cout << "-";
+            }
+        }
+    }
+    if (matrizA[0][3] == 0 && matrizA[1][3] == 0 && matrizA[2][3] == 0 && matrizA[3][3] == 0) {
+        cout << "Ganaste con: " << endl;
+        for (int i = 0; i < tam; i++) {
+            cout << matrizB[i][3] << " ";
+            if (i < tam) {
+                cout << "-";
+            }
+        }
+    }
 }
